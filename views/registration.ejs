@@ -1,0 +1,129 @@
+<%- include('./generalLayout/generalHeader.ejs') %>
+
+<div class="login">
+    <h1>SignUp</h1>
+    <form class="input" method='post'>
+        <div class="user">
+        <label for="User"><i class="fa-solid fa-user"></i></label>
+        <input type="text" name="name" id="User" placeholder="Username"></div>
+        <div class="mail">
+        <label for="email"><i class="fa-solid fa-envelope"></i></label>
+        <input type="email" name="email" id="Mail" placeholder="Email"></div>
+        <div class="password">
+        <label for="Pass"><i class="fa-solid fa-lock"></i></label>
+        <input type="password" name="password" id="Pass" placeholder="Password" >
+        </div>
+        <div class="rollno">
+            <label for="rollno" id="label" ><b>123</b></label>
+            <input type="number" name="rollno" id="rollno" placeholder="RollNo">
+        </div>
+        <div class="section">
+            <label for="section" id="label1" ><b>Sec</b></label>
+            <input type="text" name="section" id="section" placeholder="Section">
+        </div>
+
+        <div class="image" style="width: 100%; margin: 8px 0px;" id="icon" >
+            <label for="profile"><i class="fa-solid fa-camera"></i></label>
+            <span style="margin-left: 20px; cursor: pointer;">ProfilePhoto</span>
+            <input type="hidden" name="image" id="image">
+        </div>
+
+        <div class="IT1">
+            <label for="it1" id="label2" class="hidden"><b>IT-1</b></label>
+            <select name="it1" id="it1" class="hidden mix">
+                <option value="nothing">Nothing</option>
+                <option value="Ds">Data Structure</option>
+                <option value="Coa">Computer Organisation</option>
+                <option value="Dstl">DSTL</option>
+                <option value="Ese">ESE</option>
+                <option value="Cs">Cyber Security</option>
+            </select>
+        </div>
+        <div class="IT2">
+            <label for="it2" id="label3" class="hidden"><b>IT-2</b></label>
+            <select name="it2" id="it2" class="hidden mix">
+                <option value="nothing">Nothing</option>
+                <option value="Ds">Data Structure</option>
+                <option value="Coa">Computer Organisation</option>
+                <option value="Dstl">DSTL</option>
+                <option value="Ese">ESE</option>
+                <option value="Cs">Cyber Security</option>
+            </select>
+        </div>
+        <div class="IT3">
+            <label for="it3" id="label4" class="hidden"><b>IT-3</b></label>
+            <select name="it3" id="it3" class="hidden mix">
+                <option value="nothing">Nothing</option>
+                <option value="Ds">Data Structure</option>
+                <option value="Coa">Computer Organisation</option>
+                <option value="Dstl">DSTL</option>
+                <option value="Ese">ESE</option>
+                <option value="Cs">Cyber Security</option>
+            </select>
+        </div>
+
+        
+        <div class="confirm">
+            <select name="type" id="type">
+                <option value="isStudent">Student</option>
+                <option value="isTeacher">Teacher</option>
+            </select>
+        </div>
+        
+        <!-- <button>Submit</button> -->
+        <input type="submit" value="Submit" id="Submit" class="submit">
+        
+    </form>
+    <p>if you have accout already <a href="/login">Login</a></p>
+    <%
+    if(message !== undefined){
+        %>
+        <p id="para" style="color: red; font-weight: 800;" ><%= message %></p>
+        <%
+    }
+    %>
+</div>
+
+<div class="ProfilePhoto hidden" id="cover">
+    <div class="formprofile">
+        <div id="cross">X</div>
+        <form action="" id="profileForm">
+            <label for="profile"><img id="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCNYYOBtprRBGGvlzy5dvA96UqiVmituLxcmzWdFjbtg&s" alt=""></label>
+            <input type="file" name="profile" id="profile" required>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+</div>
+
+<script>
+    const para = document.getElementById('para')
+    setTimeout(() => {
+      para.innerHTML =" "
+    }, 1000);
+
+    $(document).ready(function(){
+        $('#profileForm').submit(function(e){
+            e.preventDefault()
+
+            $.ajax({
+                    url:'/upload-image',
+                    type:"POST",
+                    data: new FormData(this),
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success:function(data){
+                        if(data.success == true){
+                            $('#image').val(data.path)
+                            alert(data.msg);
+                            $("#uploadModal").modal("hide")
+                        }else{
+                            alert(data.msg);
+                        }
+                    }
+                })
+        })
+    })
+  </script>
+
+<%- include('./generalLayout/generalFooter.ejs') %>

@@ -1,0 +1,131 @@
+<%- include('../Teacher-Layout/teacherProHeader.ejs')%>
+
+<div class="navbar" id="navbar">
+    <img id="img" src="<%= Teacher.profile %>" alt="">
+    <ul id="details">
+        <li>Name: <span><%= Teacher.name %></span></li>
+        <li>Email: <span><%= Teacher.email %></span></li>
+    </ul>
+
+    <ul class="mainContentbtn">
+        <a href="/attendence/<%= Teacher._id %>"><li id="marker"><i class="fa-solid fa-marker " id="markerIcon" ></i><span id="Attendence">Attendence</span></li></a>
+        <a href="/notes/<%= Teacher._id %>"><li id="sticky"><i class="fa-regular fa-note-sticky" id="stickyIcon" ></i><span id="notes">Notes</span></li></a>
+    </ul>
+    
+    <div class="logout" id="logoutdiv">
+        <a href="#"><button id="button" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span id="logout">Logout</span></button></a>
+    </div>
+</div>
+<!-- main dashboard -->
+<div class="dashboard" id="dashboard" >
+    <i class="fa-solid fa-bars" id="bars" ></i>
+
+    <div class="attendence">
+        <div class="class-tomark">
+            <form id="sectionform">
+                <label for="section">Section</label>
+                <select name="Section" id="section">
+                    <option value=""> section  </option>
+                    <option value="IT-1">IT-1</option>
+                    <option value="IT-2">IT-2</option>
+                    <option value="IT-3">IT-3</option>
+                </select>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="class-students">
+            <ul class="ul">
+                <li>RollNo</li>
+                <li>Name</li>
+                <li>Present/Absent</li>
+            </ul>
+            <div class="seprator"></div>
+            <div class="studentMarkAttendence">
+                <form id="attendForm" method="post" >
+                    <div class="rollno">
+
+                        <%
+                            if(section === 'IT-1'){
+                                %>
+                                <input type="text" value="IT-1" name="section" hidden>
+                                <input type="text" value="IT-1" name="section" hidden>
+                                <input type="text" value="<%= Teacher.IT1 %>" name="subject" hidden>
+                                <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
+                                <%
+                            }
+                            else if(section === 'IT-2'){
+                                %>
+                                <input type="text" value="IT-2" name="section" hidden>
+                                <input type="text" value="<%= Teacher.IT2 %>" name="subject" hidden>
+                                <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
+                                <%
+                            }
+                            else if(section === 'IT-3'){
+                                %>
+                                <input type="text" value="IT-3" name="section" >
+                                <input type="text" value="<%= Teacher.IT3 %>" name="subject" hidden>
+                                <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
+                                <%
+                            }
+                            %>
+                            <input type="text" name="date" id="date" hidden>
+                            <input type="text" name="time" id="time" hidden>
+                            <%
+                            if(student.length > 0){
+                                for(let i = 0; i < student.length; i++ ){
+                                    %>
+                                    <ul>
+                                        <li><%= student[i].rollNo %></li>
+                                        <li><%= student[i].name %></li>
+                                        <li>
+                                            <div class="rollNo"> 
+                                                <label for="<%= student[i].rollNo %>present" style="cursor: pointer;" class="present1 label">P</label>
+                                                <input type="radio" required name="<%= student[i].rollNo %>" value="P" id="<%= student[i].rollNo %>present">
+                                                <label for="<%= student[i].rollNo %>absent" style="cursor: pointer;"  class="absent2 label">A</label>
+                                                <input type="radio" required name="<%= student[i].rollNo %>" value="A" id="<%= student[i].rollNo %>absent">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <%
+                                }
+                            }
+                            else{
+                                %>
+                                    <p>Please Choice Section</p>
+                                <%
+                            }
+                        %>
+                        
+                        
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</div>
+
+<!-- <script>
+    
+    $(document).ready(function(){
+        $('#attendForm').submit((e)=>{
+            e.preventDefault()
+
+            let formData = $(this).serialize
+
+            $.ajax({
+                url:'/mark-attendence',
+                type:"POST",
+                data:formData
+            })
+        })
+    })
+
+</script> -->
+
+<%- include('../Teacher-Layout/ProfileFooter.ejs')%>

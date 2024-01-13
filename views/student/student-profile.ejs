@@ -1,0 +1,318 @@
+<%- include('../Student-layout/profile-header.ejs') %>
+
+    	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-book'></i>
+     
+			<span class="text">  Student </span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="/studentProfile/<%= student._id %>">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+           
+				
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Notes</span>
+				</a>
+			</li>
+			<li>
+				<a href="/studentAttendence/<%= student._id %>">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">All Attendence</span>
+				</a>
+			</li>
+			
+		</ul>
+		<ul class="side-menu">
+			<!-- <li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li> -->
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+		
+			<i class='bx bx-menu' ></i>
+
+
+			<a href="#" class="nav-link">  <%= student.name %>  </a>
+			<a href="#" class="profile">
+				<img src="<%= student.profile %>"  alt="Teacher">
+			</a>
+		
+			<!-- <dark to light checkbox -->
+		
+
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			
+			
+		
+	</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Download Attendance PDF</span>
+				</a>
+			</div>
+
+            
+
+			<ul class="box-info">
+                <li id="sticker">
+                    <img src="https://cdn.pixabay.com/photo/2021/01/29/08/10/musician-5960112_1280.jpg" alt="sticker">
+                </li>
+               
+				<li>
+					
+				<%
+					if(Coa.length>0){
+						var rollno = student.rollNo
+						var Coacount = 0
+						for(let i = 0; i < Coa.length ; i++){
+							Coacount++
+						}					
+					}
+					if(CoaAttend.length > 0){
+						var Coaattend = 0
+						for(let i = 0; i < CoaAttend.length; i++){
+							Coaattend++
+						}
+					}
+					let CoaTot = (Coaattend/Coacount)*100
+					let CoaTotal = parseInt(CoaTot)
+					if(CoaTotal > 0){
+						%>
+						<i class='bx bxs' ><%= CoaTot %>%</i>
+						<%	
+					}else{
+						%>
+						<i class='bx bxs' >0%</i>
+						<%	
+					}
+				%>
+						<h3>BCS-302</h3>
+						<p> COA</p>
+                        <p><%= Coateacher %></p>
+					
+				</li>
+				<li>
+					<%
+					if(Tc.length>0){
+						var rollno = student.rollNo
+						var Tccount = 0
+						for(let i = 0; i < Tc.length ; i++){
+							Tccount++
+						}					
+					}
+					if(TcAttend.length > 0){
+						var Tcattend = 0
+						for(let i = 0; i < TcAttend.length; i++){
+							Tcattend++
+						}
+					}
+					let TcTotal = (Tcattend/Tccount)*100
+					if(TcTotal >0){
+						%>
+						<i class='bx bxs' ><%= parseInt(TcTotal) %>%</i>
+						<%	
+					}
+					else{
+						%>
+						<i class='bx bxs' >0%</i>
+						<%	
+					}
+				%>
+					
+					
+						<h3>BAS-301</h3>
+						<p> TC</p>
+                        <p> <%= Tcteacher %> </p>
+					
+				</li>
+				<li>
+					<%
+					if(Ds.length>0){
+						var rollno = student.rollNo
+						var Dscount = 0
+						for(let i = 0; i < Ds.length ; i++){
+							Dscount++
+						}					
+					}
+					if(DsAttend.length > 0){
+						var Dsattend = 0
+						for(let i = 0; i < DsAttend.length; i++){
+							Dsattend++
+						}
+					}
+					let DsTotal = (Dsattend/Dscount)*100
+					if(DsTotal >0){
+						%>
+						<i class='bx bxs' ><%= parseInt(DsTotal) %>%</i>
+						<%	
+					}
+					else{
+						%>
+						<i class='bx bxs' >0%</i>
+						<%	
+					}
+				%>
+					
+					
+						<h3>BAS-301</h3>
+						<p> DS </p>
+                        <p> <%= Dsteacher %> </p>
+					
+				</li>
+				<li>
+					<%
+					if(Dstl.length>0){
+						var rollno = student.rollNo
+						var Dstlcount = 0
+						for(let i = 0; i < Dstl.length ; i++){
+							Dstlcount++
+						}					
+					}
+					if(DstlAttend.length > 0){
+						var Dstlattend = 0
+						for(let i = 0; i < DstlAttend.length; i++){
+							Dstlattend++
+						}
+					}
+					let DstlTotal = (Dstlattend/Dstlcount)*100
+					if(DstlTotal >0){
+						%>
+						<i class='bx bxs' ><%= parseInt(DstlTotal) %>%</i>
+						<%	
+					}
+					else{
+						%>
+						<i class='bx bxs' >0%</i>
+						<%	
+					}
+				%>
+					
+					
+						<h3>BAS-301</h3>
+						<p> Dstl</p>
+                        <p> <%= Dstlteacher %> </p>
+					
+				</li>
+                <li>
+					<%
+					if(Ese.length>0){
+						var rollno = student.rollNo
+						var Esecount = 0
+						for(let i = 0; i < Ese.length ; i++){
+							Esecount++
+						}					
+					}
+					if(EseAttend.length > 0){
+						var Eseattend = 0
+						for(let i = 0; i < EseAttend.length; i++){
+							Eseattend++
+						}
+					}
+					let EseTotal = (Eseattend/Esecount)*100
+					if(EseTotal >0 ){
+						%>
+						<i class='bx bxs' ><%= parseInt(EseTotal) %>%</i>
+						<%	
+					}
+					else{
+						%>
+						<i class='bx bxs' >0%</i>
+						<%	
+					}
+				%>
+					
+					
+						<h3>BAS-301</h3>
+						<p> Ese</p>
+                        <p> <%= Eseteacher %> </p>
+					
+				</li>
+				<li>
+					<%
+					if(Cs.length>0){
+						var rollno = student.rollNo
+						var Cscount = 0
+						for(let i = 0; i < Cs.length ; i++){
+							Tccount++
+						}					
+					}
+					if(CsAttend.length > 0){
+						var Csattend = 0
+						for(let i = 0; i < CsAttend.length; i++){
+							Csattend++
+						}
+					}
+					let CsTotal = (Csattend/Cscount)*100
+					if(CsTotal > 0){
+						%>
+						<i class='bx bxs' ><%= parseInt(CsTotal) %>%</i>
+						<%	
+					}
+					else{
+						%>
+						<i class='bx bxs' >0%</i>
+						<%	
+					}
+				%>
+					
+					
+						<h3>BAS-301</h3>
+						<p> Cs</p>
+                        <p> <%= Csteacher %> </p>
+					
+				</li>
+				
+			</ul>
+
+
+		
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+
+<%- include('../Student-layout/profile-footer.ejs') %>
