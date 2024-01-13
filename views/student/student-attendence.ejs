@@ -105,6 +105,41 @@
                 <li>Date</li>
 			</ul>
 
+			<%
+				if(attend.length > 0){
+					let i = 1
+					attend.forEach(function(attendence){
+						let rollno = parseInt(student.rollNo)
+						let attendences = attendence.rollno
+						%>
+						<ul class="headinglist">
+							<li><%= i++ %></li>
+							<li><%= student.name %></li>
+							<li><%= attendence.subject %></li>
+							<%
+								if(attendence[rollno] === 'P'){
+									%>
+									<li>P</li>
+									<%
+								}else{
+									%>
+									<li>A</li>
+									<%
+								}
+							%>
+
+							
+							<li><%= attendence.date %></li>
+						</ul>
+						<%
+					})
+				}else{
+					%>
+						<p>No Attendence Found</p>
+					<%
+				}
+			%>
+
 
 		
 		</main>

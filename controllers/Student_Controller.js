@@ -100,8 +100,19 @@ const studentAttendence = async(req,res) =>{
     try{
         const _id = req.params._id
         const studentDetails = await StudentModal.findOne({ _id : _id })
-        console.log(_id)
-        res.render('student/student-attendence',{student:studentDetails})
+        const rollno = studentDetails.rollNo
+        const present = "P" || "A"
+        const Rollnoint = parseInt(rollno)
+        const findattend = {}
+        findattend[Rollnoint]
+        const found = await attend.find(findattend)
+        // console.log(found)
+        // console.log(found.length)
+        // const Attendence = found.findattend
+        // console.log(Attendence)
+        
+
+        res.render('student/student-attendence',{student:studentDetails,attend:found})
     }catch(err){
         console.log(err.message)
     }
