@@ -16,13 +16,13 @@
            
 				
 			</li>
-			<li>
+			<li class="active">
 				<a href="/studentNotes/<%= student._id %>">
 					<i class='bx bxs-shopping-bag-alt' ></i>
 					<span class="text">Notes</span>
 				</a>
 			</li>
-			<li class="active">
+			<li >
 				<a href="/studentAttendence/<%= student._id %>">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">All Attendence</span>
@@ -96,50 +96,46 @@
 			</div>
 
             
-
-			<ul class="headinglist">
-                <li>S.No</li>
-                <li>Name</li>
-                <li>Subject</li>
-                <li>Attendence</li>
-                <li>Date</li>
-			</ul>
-
-			<%
-				if(attend.length > 0){
-					let i = 1
-					attend.forEach(function(attendence){
-						let rollno = parseInt(student.rollNo)
-						let attendences = attendence.rollno
-						%>
-						<ul class="headinglist">
-							<li><%= i++ %></li>
-							<li><%= student.name %></li>
-							<li><%= attendence.subject %></li>
-							<%
-								if(attendence[rollno] === 'P'){
-									%>
-									<li>P</li>
-									<%
-								}else{
-									%>
-									<li>A</li>
-									<%
-								}
-							%>
-
-							
-							<li><%= attendence.date %></li>
-						</ul>
-						<%
-					})
-				}else{
-					%>
-						<p>No Attendence Found</p>
-					<%
-				}
-			%>
-
+            <div style=" margin: auto; display: flex; justify-content: center; align-items: center; "  >
+                <form style="margin: 5px 10px;">
+                    <select name="Teacher" id="Teacher" style="padding: 10px 20px; cursor: pointer; border-radius: 8px; margin: 2px 20px;">
+                        <%
+                            if(teacher.length>0){
+                                teacher.forEach(function(teachers){
+                                    %>
+                                    <option value="<%=teachers._id %>"><%= teachers.name %></option>
+                                    <%
+                                })
+                            }
+                        %>
+                    </select>
+                    <input type="submit" value="Find" style="padding: 10px 20px; cursor: pointer; border-radius: 8px; margin: 2px 20px; outline: 0; border: 0; color: white; background: #000;">
+                </form>
+            </div>
+			
+            <div class="notes">
+                <div>
+                    <p style="font-weight: 800;" >Title</p>
+                    <p style="font-weight: 800;" >Download Link</p>
+                </div>
+                <%
+                    if(notes.length>0){
+                        let i = 1
+                        notes.forEach(function(note){
+                            %>
+                            <div class="notesbox">
+                                <p><%= note.title %></p>
+                                <a href="<%= note.notes %>" download="<%= note.title %>" >Download <%= i++ %></a>
+                            </div>
+                            <%
+                        })
+                    }else{
+                        %>
+                            <p>No Notes Avaliable</p>
+                        <%
+                    }
+                %>
+            </div>
 
 		
 		</main>

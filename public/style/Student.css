@@ -515,3 +515,21 @@ body {
 	padding: 0px 10px;
 	cursor: pointer;
 }
+
+.notes{
+	display: flex;
+	flex-direction: column ;
+	justify-content: center;
+	align-items: center;
+	/* background: #000; */
+	gap: 20px;
+}
+
+
+.notes>div{
+	/* background: #000; */
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}

@@ -1,6 +1,7 @@
 const TeacherModal = require('../models/TeacherModal')
 const attend = require('../models/attend')
 const StudentModal = require('../models/StudentModal')
+const note = require('../models/notes')
 
 const StudentLoad = async(req,res) =>{
     try{
@@ -118,10 +119,28 @@ const studentAttendence = async(req,res) =>{
     }
 }
 
+const studentNotes = async (req,res) =>{
+    try{
+
+        const id = req.params._id
+        const Teacherfind = req.query.Teacher
+        const studentDetails = await StudentModal.findOne({_id:id})
+        const notesByteacherId = await note.find({teacherId : Teacherfind})
+        const Teacher = await TeacherModal.find({})
+
+        
+        res.render('student/student-notes',{teacher:Teacher, student:studentDetails, notes:notesByteacherId})
+
+    }catch(err){
+        console.log(err.message)
+    }
+}
 
 module.exports = {
     StudentLoad,
     studentAttendence,
+    studentNotes,
+
 
 
     
