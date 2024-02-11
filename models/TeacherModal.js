@@ -40,6 +40,10 @@ const TeacherSchema = new mongoose.Schema({
     IT3:{
         type:String,
         required:true
+    },
+    mentor:{
+        type:String,
+        default:""
     }
 })
 

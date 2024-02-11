@@ -9,6 +9,8 @@ app.use('/',TeacherRouter)
 const StudentRouter = require('./routes/StudentRouter.js')
 app.use('/',StudentRouter)
 
+const AdminRouter = require('./routes/AdminRouter.js')
+app.use('/',AdminRouter)
 
 // dataBase connected
 mongooseConnect()

@@ -1,131 +1,186 @@
-<%- include('../Teacher-Layout/teacherProHeader.ejs')%>
+<%- include('../Teacher-Layout/teacherProHeader.ejs') %>
 
-<div class="navbar" id="navbar">
-    <img id="img" src="<%= Teacher.profile %>" alt="">
-    <ul id="details">
-        <li>Name: <span><%= Teacher.name %></span></li>
-        <li>Email: <span><%= Teacher.email %></span></li>
-    </ul>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-book-bookmark'></i>
+     
+			<span class="text"> Teacher </span>
+		</a>
+		<ul class="side-menu top">
+			<!-- <li>
+				<a href="/teacher-dashboard.html">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+				
+			</li> -->
+			<li class="active">
+				<a href="/attendence/<%= Teacher._id %>">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Attendence</span>
+				</a>
+			</li>
+			<li>
+				<a href="/notes/<%= Teacher._id %>">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Notes</span>
+				</a>
+			</li>
+			<li>
+				<a href="/Teacher-message/<%= Teacher._id %>">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Message</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
 
-    <ul class="mainContentbtn">
-        <a href="/attendence/<%= Teacher._id %>"><li id="marker"><i class="fa-solid fa-marker " id="markerIcon" ></i><span id="Attendence">Attendence</span></li></a>
-        <a href="/notes/<%= Teacher._id %>"><li id="sticky"><i class="fa-regular fa-note-sticky" id="stickyIcon" ></i><span id="notes">Notes</span></li></a>
-    </ul>
-    
-    <div class="logout" id="logoutdiv">
-        <a href="#"><button id="button" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span id="logout">Logout</span></button></a>
-    </div>
-</div>
-<!-- main dashboard -->
-<div class="dashboard" id="dashboard" >
-    <i class="fa-solid fa-bars" id="bars" ></i>
 
-    <div class="attendence">
-        <div class="class-tomark">
-            <form id="sectionform">
-                <label for="section">Section</label>
-                <select name="Section" id="section">
-                    <option value=""> section  </option>
-                    <option value="IT-1">IT-1</option>
-                    <option value="IT-2">IT-2</option>
-                    <option value="IT-3">IT-3</option>
-                </select>
-                <input type="submit" value="Submit">
-            </form>
-        </div>
 
-        <div class="class-students">
-            <ul class="ul">
-                <li>RollNo</li>
-                <li>Name</li>
-                <li>Present/Absent</li>
-            </ul>
-            <div class="seprator"></div>
-            <div class="studentMarkAttendence">
-                <form id="attendForm" method="post" >
-                    <div class="rollno">
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+		
+			<i class='bx bx-menu' ></i>
 
-                        <%
-                            if(section === 'IT-1'){
-                                %>
-                                <input type="text" value="IT-1" name="section" hidden>
-                                <input type="text" value="IT-1" name="section" hidden>
-                                <input type="text" value="<%= Teacher.IT1 %>" name="subject" hidden>
-                                <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
-                                <%
-                            }
-                            else if(section === 'IT-2'){
-                                %>
-                                <input type="text" value="IT-2" name="section" hidden>
-                                <input type="text" value="<%= Teacher.IT2 %>" name="subject" hidden>
-                                <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
-                                <%
-                            }
-                            else if(section === 'IT-3'){
-                                %>
-                                <input type="text" value="IT-3" name="section" >
-                                <input type="text" value="<%= Teacher.IT3 %>" name="subject" hidden>
-                                <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
-                                <%
-                            }
-                            %>
-                            <input type="text" name="date" id="date" hidden>
-                            <input type="text" name="time" id="time" hidden>
-                            <%
-                            if(student.length > 0){
-                                for(let i = 0; i < student.length; i++ ){
-                                    %>
-                                    <ul>
-                                        <li><%= student[i].rollNo %></li>
-                                        <li><%= student[i].name %></li>
-                                        <li>
-                                            <div class="rollNo"> 
-                                                <label for="<%= student[i].rollNo %>present" style="cursor: pointer;" class="present1 label">P</label>
-                                                <input type="radio" required name="<%= student[i].rollNo %>" value="P" id="<%= student[i].rollNo %>present">
-                                                <label for="<%= student[i].rollNo %>absent" style="cursor: pointer;"  class="absent2 label">A</label>
-                                                <input type="radio" required name="<%= student[i].rollNo %>" value="A" id="<%= student[i].rollNo %>absent">
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <%
-                                }
-                            }
-                            else{
-                                %>
-                                    <p>Please Choice Section</p>
-                                <%
-                            }
-                        %>
-                        
-                        
+
+			<a href="#" class="nav-link"><%= Teacher.name %></a>
+			<a href="#" class="profile">
+				<img src="<%= Teacher.profile %>"  alt="Teacher">
+			</a>
+		
+			<!-- <dark to light checkbox -->
+		
+
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			
+			
+		
+	</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Mark Attendence</h3>
+					</div>
+                    <div class="order-first">
+                        <form action="">
+                            <select name="Section" id="section">
+                                <option value="IT-1">IT-1</option>
+                                <option value="IT-2">IT-2</option>
+                                <option value="IT-3">IT-3</option>
+                            </select>
+                            <input type="submit" value="Submit">
+                        </form>
                     </div>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-        </div>
 
-    </div>
+                    <div class="all-students">
+                        <ul class="ul">
+                            <li>RollNo</li>
+                            <li>Name</li>
+                            <li>Present/Absent</li>
+                        </ul>
+                        <div class="seprator"></div>
+                        <div class="studentMarkAttendence">
+                            <form id="attendForm" method="post" >
+                                <div class="rollno">
+            
+                                    <%
+                                        if(section === 'IT-1'){
+                                            %>
+                                            <input type="text" value="IT-1" name="section" hidden>
+                                            <input type="text" value="IT-1" name="section" hidden>
+                                            <input type="text" value="<%= Teacher.IT1 %>" name="subject" hidden>
+                                            <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
+                                            <%
+                                        }
+                                        else if(section === 'IT-2'){
+                                            %>
+                                            <input type="text" value="IT-2" name="section" hidden>
+                                            <input type="text" value="<%= Teacher.IT2 %>" name="subject" hidden>
+                                            <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
+                                            <%
+                                        }
+                                        else if(section === 'IT-3'){
+                                            %>
+                                            <input type="text" value="IT-3" name="section" >
+                                            <input type="text" value="<%= Teacher.IT3 %>" name="subject" hidden>
+                                            <input type="text" value="<%= Teacher._id %>" name="teacherId" hidden>
+                                            <%
+                                        }
+                                        %>
+                                        <input type="text" name="date" id="date" hidden>
+                                        <input type="text" name="time" id="time" hidden>
+                                        <%
+                                        if(student.length > 0){
+                                            for(let i = 0; i < student.length; i++ ){
+                                                %>
+                                                <ul>
+                                                    <li><%= student[i].rollNo %></li>
+                                                    <li><%= student[i].name %></li>
+                                                    <li>
+                                                        <div class="rollNo"> 
+                                                            <label for="<%= student[i].rollNo %>present" style="cursor: pointer;" class="present1 label">P</label>
+                                                            <input type="radio" required name="<%= student[i].rollNo %>" value="P" id="<%= student[i].rollNo %>present">
+                                                            <label for="<%= student[i].rollNo %>absent" style="cursor: pointer;"  class="absent2 label">A</label>
+                                                            <input type="radio" required name="<%= student[i].rollNo %>" value="A" id="<%= student[i].rollNo %>absent">
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <%
+                                            }
+                                        }
+                                        else{
+                                            %>
+                                                <p>Please Choice Section</p>
+                                            <%
+                                        }
+                                    %>
+                                    
+                                    
+                                </div>
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div>
+
+                    </div>					
 
 
-</div>
-</div>
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
 
-<!-- <script>
-    
-    $(document).ready(function(){
-        $('#attendForm').submit((e)=>{
-            e.preventDefault()
+    <script>
+        const date = document.getElementById('date')
+        const time = document.getElementById('time')
 
-            let formData = $(this).serialize
+        let d = new Date()
+        date.value = d.getDate()+'/'+d.getMonth()+'/'+d.getFullYear()
+        time.value = d.getHours()+":"+d.getMinutes()
+    </script>
 
-            $.ajax({
-                url:'/mark-attendence',
-                type:"POST",
-                data:formData
-            })
-        })
-    })
-
-</script> -->
-
-<%- include('../Teacher-Layout/ProfileFooter.ejs')%>
+<%- include('../Teacher-Layout/ProfileFooter.ejs') %>

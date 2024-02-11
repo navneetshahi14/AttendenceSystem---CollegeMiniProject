@@ -89,6 +89,9 @@ Teacher_Router.post('/delete-notes',TeacherController.notesDelete)
 // notesUpdate
 Teacher_Router.post('/update-notes',TeacherController.notesUpdate)
 
+Teacher_Router.get('/Teacher-message/:id',TeacherController.messagePanel)
+
+Teacher_Router.post('/teacherpost',TeacherController.makeMessage)
 
 
 module.exports = Teacher_Router

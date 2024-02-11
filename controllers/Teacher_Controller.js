@@ -3,6 +3,9 @@ const StudentModal = require('../models/StudentModal')
 const {ObjectId} = require('mongodb')
 const attend  =  require('../models/attend')
 const note = require('../models/notes')
+const mentor = require('../models/MentorModal')
+const messageModal = require('../models/teacherMessage')
+const messageTeacher = require('../models/teacherMessage')
 
 const Attendence = async(req,res) =>{
     try{
@@ -136,6 +139,48 @@ const notesUpdate = async(req,res)=>{
     }
 }
 
+const messagePanel = async(req,res) =>{
+    try{
+        
+        const id = req.params.id
+        const teacher = await TeacherModal.findOne({_id:id})
+        const teacherMessage = await messageTeacher.find({teacherId:teacher._id})
+
+
+        res.render('teacher/teacher-Message.ejs',{ Teacher:teacher,messages:teacherMessage })
+
+    }catch(err){
+        console.log(err.message)
+    }
+}
+
+const makeMessage = async(req,res) =>{
+    try{
+
+        const id = req.body.teacherId
+        const title = req.body.title
+        const message = req.body.details
+        const date = req.body.date
+        const type = req.body.type
+        
+        const messageing = new messageTeacher({
+            teacherId:id,
+            title:title,
+            message:message,
+            date:date,
+            type:type
+        })
+
+        await messageing.save()
+
+        res.redirect('/Teacher-message/'+id)
+        
+
+    }catch(err){
+        console.log(err.message)
+    }
+}
+
 module.exports = {
     Attendence,
     notes,
@@ -144,5 +189,6 @@ module.exports = {
     uploadTitleNotes,
     notesDelete,
     notesUpdate,
-    
+    messagePanel,
+    makeMessage
 }

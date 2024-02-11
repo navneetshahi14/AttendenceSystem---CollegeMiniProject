@@ -2,6 +2,9 @@ const TeacherModal = require('../models/TeacherModal')
 const attend = require('../models/attend')
 const StudentModal = require('../models/StudentModal')
 const note = require('../models/notes')
+const extra = require('../models/AnnounceModal')
+const teacherMessage = require('../models/teacherMessage')
+const mentor = require('../models/MentorModal')
 
 const StudentLoad = async(req,res) =>{
     try{
@@ -136,12 +139,58 @@ const studentNotes = async (req,res) =>{
     }
 }
 
+const extracurricular = async(req,res) =>{
+    try{
+
+        const extracur = await extra.find()
+        const id = req.params._id
+        const student = await StudentModal.findOne({_id:id})
+
+        res.render('student/student-extra.ejs',{extra:extracur,student:student})
+
+    }catch(err){
+        console.log(err.message)
+    }
+}
+
+const Message = async(req,res) =>{
+    try{
+
+        const teachermessage = await teacherMessage.find({type:"isTeacher"})
+        const id = req.params._id
+        const student = await StudentModal.findOne({_id:id})
+
+        res.render("student/student-teacher.ejs",{message:teachermessage,student:student})
+
+    }catch(err){
+        console.log(err.message)
+    }
+}
+
+const mentorMessage = async(req,res) =>{
+    try{
+
+        const id = req.params._id
+        const student = await StudentModal.findOne({_id:id})
+        const mentorsearch = await mentor.find({ students: { $in: [student.rollNo] } })
+        console.log(mentorsearch[0].mentorId)
+        const mentorid = mentorsearch[0].mentorId
+        const teachermsg = await teacherMessage.find({ teacherId: mentorid })
+        console.log(teachermsg)
+
+        res.render('student/student-Mentor.ejs',{student:student,message:teachermsg})
+
+    }catch(err){
+        console.log(err.message)
+    }
+}
+
 module.exports = {
     StudentLoad,
     studentAttendence,
     studentNotes,
+    extracurricular,
+    Message,
+    mentorMessage
 
-
-
-    
 }

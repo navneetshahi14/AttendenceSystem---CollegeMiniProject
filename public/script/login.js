@@ -8,7 +8,7 @@ type.onchange =()=>{
         toggle.name = "rollno"
         toggle.placeholder = "RollNo"
     }
-    else if(type.value === "isTeacher"){
+    else{
         toggle.type = "email"
         toggle.name = "email"
         toggle.placeholder = "Email"

@@ -1,5 +1,6 @@
 const TeacherModal = require('../models/TeacherModal')
 const StudentModal = require('../models/StudentModal')
+const AdminModal = require('../models/AdminModal')
 const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
 const randomstring = require('randomstring')
@@ -92,8 +93,9 @@ const Registration = async(req,res) =>{
         
         const TeacherFind = await TeacherModal.findOne({email:email})
         const StudentFind = await StudentModal.findOne({email:email})
+        const AdminFind = await AdminModal.findOne({email:email})
 
-        if(!TeacherFind && !StudentFind){
+        if(!TeacherFind && !StudentFind && !AdminFind){
             if(type === "isTeacher"){
                 const Teacher = new TeacherModal({
                     name:name,
@@ -124,6 +126,18 @@ const Registration = async(req,res) =>{
                 await Student.save()
                 res.redirect('/studentProfile/'+Student._id)
             }
+            else if(type === "isAdmin"){
+                const Admin = new AdminModal({
+                    name:name,
+                    email:email,
+                    password:password,
+                    type:type,
+                    profile:profile
+                })
+
+                await Admin.save()
+                res.redirect('/admin/'+Admin._id)
+            }
         }
         else{
             res.render("registration",{message:"User Exists"})
@@ -143,6 +157,7 @@ const Login = async(req,res) =>{
 
         const Teacher = await TeacherModal.findOne({email:email})
         const Student = await StudentModal.findOne({rollNo:rollno})
+        const Admin = await AdminModal.findOne({email:email})
 
         if(Teacher){
 
@@ -158,6 +173,14 @@ const Login = async(req,res) =>{
 
             if(studentpassmatch){
                 res.redirect('/studentProfile/'+Student._id)
+            }else{
+                res.render('login',{message:"Wrong Credentials"})
+            }
+        }
+        else if(Admin){
+            const adminpass = await bcrypt.compare(password,Admin.password)
+            if(adminpass){
+                res.redirect('/admin/'+Admin._id)
             }else{
                 res.render('login',{message:"Wrong Credentials"})
             }

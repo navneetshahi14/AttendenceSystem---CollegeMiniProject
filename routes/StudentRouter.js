@@ -25,4 +25,10 @@ Student_Router.get('/studentAttendence/:_id',studentController.studentAttendence
 
 Student_Router.get('/studentNotes/:_id',studentController.studentNotes)
 
+Student_Router.get('/Extra/:_id',studentController.extracurricular) 
+
+Student_Router.get('/teacherMessage/:_id',studentController.Message)
+
+Student_Router.get('/mentorMessage/:_id',studentController.mentorMessage)
+
 module.exports = Student_Router

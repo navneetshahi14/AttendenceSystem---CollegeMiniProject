@@ -35,6 +35,8 @@ type.onchange =()=>{
 
 
     }else if(type.value === "isStudent"){
+        rollno.classList.remove('hidden')
+
         rollno.type = "number"
         rollno.name = "rollno"
         rollno.placeholder = "RollNo"
@@ -45,6 +47,7 @@ type.onchange =()=>{
         it2.name = ""
         it3.name = ""
 
+
         it1.classList.add('hidden')
         it2.classList.add('hidden')
         it3.classList.add('hidden')
@@ -54,6 +57,19 @@ type.onchange =()=>{
         label2.classList.add('hidden')
         label3.classList.add('hidden')
         label4.classList.add('hidden')
+
+    }
+    else{
+        rollno.classList.add('hidden')
+        label.classList.add('hidden')
+        label1.classList.add('hidden')
+        it1.classList.add('hidden')
+        it2.classList.add('hidden')
+        it3.classList.add('hidden')
+        label2.classList.add('hidden')
+        label3.classList.add('hidden')
+        label4.classList.add('hidden')
+        section.classList.add('hidden')
 
     }
 }

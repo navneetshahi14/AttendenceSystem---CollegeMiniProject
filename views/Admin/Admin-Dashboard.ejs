@@ -1,0 +1,267 @@
+<%- include('../Admin-Layout/Admin-header.ejs')  %>
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-book-bookmark'></i>
+     
+			<span class="text"> Admin </span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="/admin/<%= Admin._id %>">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+				
+			</li>
+			<li>
+				<a href="/adminstudent/<%= Admin._id %>">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text"> Student List</span>
+				</a>
+			</li>
+			<li>
+				<a href="/adminteacher/<%= Admin._id %>">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text"> Teacher List</span>
+				</a>
+			</li>
+			<li>
+				<a href="/adminannounce/<%= Admin._id %>">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text"> Announcement</span>
+				</a>
+			</li>
+			<li>
+				<a href="/adminMentor/<%= Admin._id %>">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Manage Mentors</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+		
+			<i class='bx bx-menu' ></i>
+
+
+			<a href="#" class="nav-link"> <%= Admin.name %>   </a>
+			<a href="#" class="profile">
+				<img src="<%= Admin.profile %>"  alt="Teacher">
+			</a>
+		
+			<!-- <dark to light checkbox -->
+		
+
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			
+			
+		
+	</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-detail' ></i>
+					<span class="text">
+						<h3>3</h3>
+						<p>Number of classes</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3><%= student.length %></h3>
+						<p>Total Student</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-arrow-to-bottom' ></i>
+					<span class="text">
+						<h3><%= teacher.length %></h3>
+						<p>Total Teachers</p>
+					</span>
+				</li>
+				<!-- <li id="NewClass">
+					<i class='bx bxs-door-open' ></i>
+					<span class="text" >
+						<h3>Create</h3>
+						<p>New Classes</p>
+					</span>
+					
+					    <div class="radio-input hidden">
+							<div class="info">
+							<span class="question">Which Class You want to Add.</span>
+							
+							 </div>
+							<input type="radio" id="value-1" name="value-radio" value="value-1">
+							<label for="value-1"> IT-1</label>
+							<input type="radio" id="value-2" name="value-radio" value="value-2">
+							<label for="value-2">IT-2</label>
+							<input type="radio" id="value-3" name="value-radio" value="value-3">
+							<label for="value-3">CS</label>
+							 
+						</div>
+
+
+					
+				</li> -->
+				
+			</ul>
+
+
+			<!-- <div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Classes</h3>'
+						 
+						<div id="deleteContainer" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+							<button id="deleteBtn" class="status" onclick="deleteRow()"> <i class="bx bx-cylinder"></i>Delete Selected Row</button>
+						  </div>
+						
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table id="myTable">
+						<thead>
+							<tr>
+								<th>Class</th>
+								<th>Date of starting</th>
+								<th>Check Status</th>
+								<th>Today's Attendance</th>
+								<th>Transfer to Other Teacher</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr draggable="true" ondragstart="handleDragStart(event)">
+								<td>
+									<img src="img/people.png">
+									<p>IT-1</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Check</span></td>
+								<td><span class="status pending">Pending</span></td>
+								<td><span class="status process">Teacher Details</span> <i class='bx bxs-share' ></i> </td>
+							</tr>
+							<tr draggable="true" ondragstart="handleDragStart(event)">
+								<td>
+									<img src="img/people.png">
+									<p>IT-2</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Check</span></td>
+								<td><span class="status pending">Take </span></td>
+								<td><span class="status process">Teacher Details</span> <i class='bx bxs-share' ></i> </td>
+							</tr>
+							<tr draggable="true" ondragstart="handleDragStart(event)">
+								<td>
+									<img src="img/people.png">
+									<p>IT-3</p>
+								</td>
+								
+								<td>01-10-2021</td>
+								<td><span class="status completed">Check</span></td>
+								<td><span class="status pending">Pending</span></td>
+								<td><span class="status process">Teacher Details</span> <i class='bx bxs-share' ></i> </td>
+							</tr>
+							<tr draggable="true" ondragstart="handleDragStart(event)">
+								<td>
+									<img src="img/people.png">
+									<p>CSDS-1</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Check</span></td>
+								<td><span class="status pending">Pending</span></td>
+								<td><span class="status process">Teacher Details</span> <i class='bx bxs-share' ></i> </td>
+							</tr>
+							<tr draggable="true" ondragstart="handleDragStart(event)">
+								<td>
+									<img src="img/people.png">
+									<p>CSDS-2</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Check</span></td>
+								<td><span class="status pending">Pending</span></td>
+								<td><span class="status process">Teacher Details</span> <i class='bx bxs-share' ></i> </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="todo">
+					<div class="head">
+						<h3>Todos</h3>
+						<i class='bx bx-plus' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<ul class="todo-list">
+						<li class="completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+						<li class="completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+						<li class="not-completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+						<li class="completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+						<li class="not-completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+					</ul>
+				</div>
+			</div> -->
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+<%- include('../Admin-Layout/Admin-footer.ejs')  %>
