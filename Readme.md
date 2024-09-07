@@ -1,6 +1,3 @@
-Here’s a sample `README.md` for your **Attendance and Communication System** project. You can customize it to match your exact project details:
-
----
 
 # Attendance and Communication System
 
@@ -117,7 +114,3 @@ Feel free to submit issues, fork the repository, and make pull requests. Contrib
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
----
-
-You can further personalize this according to your actual project details and specific needs.
