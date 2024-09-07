@@ -48,7 +48,6 @@ const upload_notes = multer({storage:storage_notes})
 
 const auth = require('../controllers/AuthController')
 const TeacherController = require('../controllers/Teacher_Controller')
-const Teacher = require('../models/TeacherModal')
 
 // Registration Router
 Teacher_Router.get('/registration',auth.LoadRegistration)

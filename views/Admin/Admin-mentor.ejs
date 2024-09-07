@@ -221,8 +221,10 @@
                                         if(Student.length>0){
                                             Student.forEach((student)=>{
                                                 %>
+                                                <div>
                                                     <label for="<%= student._id %>"><%= student.rollNo %></label>
                                                     <input type="checkbox" name="<%= student.rollNo %>"  id="<%= student._id %>" value="<%= student.rollNo %>">
+                                                </div>
                                                 <%
                                             })
                                         }

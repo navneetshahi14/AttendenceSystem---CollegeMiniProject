@@ -614,6 +614,17 @@ body {
 }
 
 
+.students{
+	display:flex;
+	flex-direction: column;
+	margin: 4px auto;
+}
+.students div{
+	display: flex;
+	gap: 100px;
+	margin: 10px 5px;
+}
+
 
 
 

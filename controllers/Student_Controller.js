@@ -175,7 +175,7 @@ const mentorMessage = async(req,res) =>{
         const mentorsearch = await mentor.find({ students: { $in: [student.rollNo] } })
         console.log(mentorsearch[0].mentorId)
         const mentorid = mentorsearch[0].mentorId
-        const teachermsg = await teacherMessage.find({ teacherId: mentorid })
+        const teachermsg = await teacherMessage.find({ teacherId: mentorid, type:"isMentor" })
         console.log(teachermsg)
 
         res.render('student/student-Mentor.ejs',{student:student,message:teachermsg})

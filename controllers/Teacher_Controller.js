@@ -1,10 +1,10 @@
 const TeacherModal = require('../models/TeacherModal')
 const StudentModal = require('../models/StudentModal')
-const {ObjectId} = require('mongodb')
+// const {ObjectId} = require('mongodb')
 const attend  =  require('../models/attend')
 const note = require('../models/notes')
-const mentor = require('../models/MentorModal')
-const messageModal = require('../models/teacherMessage')
+// const mentor = require('../models/MentorModal')
+// const messageModal = require('../models/teacherMessage')
 const messageTeacher = require('../models/teacherMessage')
 
 const Attendence = async(req,res) =>{
@@ -34,7 +34,7 @@ const notes = async(req,res) =>{
 
 
     }catch(err){
-        console.log(err)
+        console.log(err.message)
     }
 }
 

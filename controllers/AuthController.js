@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 const nodemailer = require('nodemailer')
 const randomstring = require('randomstring')
 const config = require('../config/config')
-const { random } = require('animejs')
 
 const securePassword = async (password) =>{
     try{
